@@ -64,8 +64,8 @@ jobs:
         cp $(pwd)/arch/arm64/boot/Image $(pwd)/anykernel/
         cd anykernel; zip -9 -r ../output/a137f_u6_kernel_TESTING-$(date +%Y-%m-%d).zip ./* ; cd ..
         curl -F "chat_id=1866453320" -F "document=@output/a137f_u6_kernel_TESTING-$(date +%Y-%m-%d).zip" "https://api.telegram.org/bot7854231397:AAHWtx4hS9ow-Lntr2-5TMJJq6KHSAxfd9o/sendDocument"
-        curl -F "chat_id=-1002124013929" -F "document=@output/a137f_u6_kernel_TESTING-$(date +%Y-%m-%d).zip"  -F caption="$COMMIT_TITLE" "https://api.telegram.org/bot7854231397:AAHWtx4hS9ow-Lntr2-5TMJJq6KHSAxfd9o/sendDocument"
-        curl -F "chat_id=-1002150067042" -F "document=@output/a137f_u6_kernel_TESTING-$(date +%Y-%m-%d).zip"  -F caption="$COMMIT_TITLE" "https://api.telegram.org/bot7854231397:AAHWtx4hS9ow-Lntr2-5TMJJq6KHSAxfd9o/sendDocument"
+        # curl -F "chat_id=-1002124013929" -F "document=@output/a137f_u6_kernel_TESTING-$(date +%Y-%m-%d).zip"  -F caption="$COMMIT_TITLE" "https://api.telegram.org/bot7854231397:AAHWtx4hS9ow-Lntr2-5TMJJq6KHSAxfd9o/sendDocument"
+        # curl -F "chat_id=-1002150067042" -F "document=@output/a137f_u6_kernel_TESTING-$(date +%Y-%m-%d).zip"  -F caption="$COMMIT_TITLE" "https://api.telegram.org/bot7854231397:AAHWtx4hS9ow-Lntr2-5TMJJq6KHSAxfd9o/sendDocument"
         
         # curl -X POST "https://api.telegram.org/bot7854231397:AAHWtx4hS9ow-Lntr2-5TMJJq6KHSAxfd9o/sendMessage" -d "chat_id=2150067042" -d "text$(date)"
         
