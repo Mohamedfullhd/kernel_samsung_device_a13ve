@@ -1,0 +1,23 @@
+# How tocreturn back this splitted file?
+
+this file is more tham 200MB and github hates files more than 100MB then I spkitted it into 3 files with command
+```
+split -b 50MB SM-A137F_EUR_14_Opensource.zip samsung-opensource-zip_
+rm SM-A137F_EUR_14_Opensource.zip 
+```
+
+to return it back again
+```
+cat samsung-opensource-zip_a* > SM-A137F_EUR_14_Opensource.zip
+``` 
+
+to check if file have no carruptions
+```
+md5sum SM-A137F_EUR_14_Opensource.zip
+```
+
+if the output was
+```
+82ad3c6a2b0f16e1f250ba3d7027ad3c  SM-A137F_EUR_14_Opensource.zip
+```
+then file have no problems
