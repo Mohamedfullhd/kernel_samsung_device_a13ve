@@ -2948,6 +2948,13 @@ int tcpc_typec_handle_ps_change(struct tcpc_device *tcpc, int vbus_level)
 {
 	tcpc->typec_reach_vsafe0v = false;
 
+	// open vsafe0.8v irq
+	if (vbus_level >= TCPC_VBUS_VALID) {
+		typec_disable_low_power_mode(tcpc);
+	} else {
+		typec_enter_low_power_mode(tcpc);
+	}
+
 #ifdef CONFIG_TYPEC_CHECK_LEGACY_CABLE
 	if (tcpc->typec_legacy_cable) {
 		typec_legacy_handle_ps_change(tcpc, vbus_level);
