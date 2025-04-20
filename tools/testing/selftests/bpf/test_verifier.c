@@ -2002,27 +2002,29 @@ static struct bpf_test tests[] = {
 		.result = ACCEPT,
 	},
 	{
-		"check skb->hash byte load permitted 1",
+		"check skb->hash byte load not permitted 1",
 		.insns = {
 			BPF_MOV64_IMM(BPF_REG_0, 0),
 			BPF_LDX_MEM(BPF_B, BPF_REG_0, BPF_REG_1,
 				    offsetof(struct __sk_buff, hash) + 1),
 			BPF_EXIT_INSN(),
 		},
-		.result = ACCEPT,
+		.errstr = "invalid bpf_context access",
+		.result = REJECT,
 	},
 	{
-		"check skb->hash byte load permitted 2",
+		"check skb->hash byte load not permitted 2",
 		.insns = {
 			BPF_MOV64_IMM(BPF_REG_0, 0),
 			BPF_LDX_MEM(BPF_B, BPF_REG_0, BPF_REG_1,
 				    offsetof(struct __sk_buff, hash) + 2),
 			BPF_EXIT_INSN(),
 		},
-		.result = ACCEPT,
+		.errstr = "invalid bpf_context access",
+		.result = REJECT,
 	},
 	{
-		"check skb->hash byte load permitted 3",
+		"check skb->hash byte load not permitted 3",
 		.insns = {
 			BPF_MOV64_IMM(BPF_REG_0, 0),
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -2034,7 +2036,8 @@ static struct bpf_test tests[] = {
 #endif
 			BPF_EXIT_INSN(),
 		},
-		.result = ACCEPT,
+		.errstr = "invalid bpf_context access",
+		.result = REJECT,
 	},
 	{
 		"check cb access: byte, wrong type",
@@ -2146,7 +2149,7 @@ static struct bpf_test tests[] = {
 		.result = ACCEPT,
 	},
 	{
-		"check skb->hash half load permitted 2",
+		"check skb->hash half load not permitted",
 		.insns = {
 			BPF_MOV64_IMM(BPF_REG_0, 0),
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -2155,37 +2158,6 @@ static struct bpf_test tests[] = {
 #else
 			BPF_LDX_MEM(BPF_H, BPF_REG_0, BPF_REG_1,
 				    offsetof(struct __sk_buff, hash)),
-#endif
-			BPF_EXIT_INSN(),
-		},
-		.result = ACCEPT,
-	},
-	{
-		"check skb->hash half load not permitted, unaligned 1",
-		.insns = {
-			BPF_MOV64_IMM(BPF_REG_0, 0),
-#if __BYTE_ORDER == __LITTLE_ENDIAN
-			BPF_LDX_MEM(BPF_H, BPF_REG_0, BPF_REG_1,
-				    offsetof(struct __sk_buff, hash) + 1),
-#else
-			BPF_LDX_MEM(BPF_H, BPF_REG_0, BPF_REG_1,
-				    offsetof(struct __sk_buff, hash) + 3),
-#endif
-			BPF_EXIT_INSN(),
-		},
-		.errstr = "invalid bpf_context access",
-		.result = REJECT,
-	},
-	{
-		"check skb->hash half load not permitted, unaligned 3",
-		.insns = {
-			BPF_MOV64_IMM(BPF_REG_0, 0),
-#if __BYTE_ORDER == __LITTLE_ENDIAN
-			BPF_LDX_MEM(BPF_H, BPF_REG_0, BPF_REG_1,
-				    offsetof(struct __sk_buff, hash) + 3),
-#else
-			BPF_LDX_MEM(BPF_H, BPF_REG_0, BPF_REG_1,
-				    offsetof(struct __sk_buff, hash) + 1),
 #endif
 			BPF_EXIT_INSN(),
 		},
