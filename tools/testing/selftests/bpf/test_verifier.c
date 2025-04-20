@@ -963,7 +963,6 @@ static struct bpf_test tests[] = {
 		.errstr_unpriv = "attempt to corrupt spilled",
 		.errstr = "corrupted spill",
 		.result = REJECT,
-		.flags = F_NEEDS_EFFICIENT_UNALIGNED_ACCESS,
 	},
 	{
 		"invalid src register in STX",
@@ -1778,7 +1777,6 @@ static struct bpf_test tests[] = {
 		.errstr = "invalid bpf_context access",
 		.result = REJECT,
 		.prog_type = BPF_PROG_TYPE_SK_MSG,
-		.flags = F_NEEDS_EFFICIENT_UNALIGNED_ACCESS,
 	},
 	{
 		"invalid read past end of SK_MSG",
@@ -2178,7 +2176,6 @@ static struct bpf_test tests[] = {
 		},
 		.errstr = "invalid bpf_context access",
 		.result = REJECT,
-		.flags = F_NEEDS_EFFICIENT_UNALIGNED_ACCESS,
 	},
 	{
 		"check skb->hash half load not permitted, unaligned 3",
